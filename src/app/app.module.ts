@@ -24,12 +24,17 @@ import { PortalsService } from './portals.service';
 import { CanActivateIfLogged } from './guards/can-activate-if-logged.guard';
 import { CanActivateIfUser } from './guards/can-activate-if-user.guard';
 import { CanDeactivateGuard } from './guards/can-deactivate.guard';
+import { PagesResolve } from './main/pages/pages-resolve.guard';
+import { EventsCanActivate } from './main/pages/events/events-can-activate';
+import { DocumentsCanActivate } from './main/pages/documents/documents-can-activate';
 
 import { MainSidenavComponent } from './main/main-sidenav/main-sidenav.component';
 import { UserinfoComponent } from './main/userinfo/userinfo.component';
 import { PageComponent } from './main/page/page.component';
 import { DossierIndividualComponent } from './main/dossier-individual/dossier-individual.component';
 import { DossierGroupedComponent } from './main/dossier-grouped/dossier-grouped.component';
+import { EventsComponent } from './main/pages/events/events.component';
+import { DocumentsComponent } from './main/pages/documents/documents.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,9 @@ import { DossierGroupedComponent } from './main/dossier-grouped/dossier-grouped.
     PageComponent,
     DossierIndividualComponent,
     DossierGroupedComponent,
-    CheckboxRendererComponent
+    CheckboxRendererComponent,
+    EventsComponent,
+    DocumentsComponent
     // Guards
     // .
   ],
@@ -72,7 +79,10 @@ import { DossierGroupedComponent } from './main/dossier-grouped/dossier-grouped.
     CanActivateIfLogged,
     CanActivateIfUser,
     CanDeactivateGuard,
-    CanDeactivateGuard
+    CanDeactivateGuard,
+    PagesResolve,
+    DocumentsCanActivate,
+    EventsCanActivate
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

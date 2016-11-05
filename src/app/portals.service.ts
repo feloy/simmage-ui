@@ -1,6 +1,6 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Subject } from 'rxjs/Subject';
 import './rxjs_operators';
 
 import { UserService } from './user.service';
@@ -25,7 +25,7 @@ export interface PortalData {
 export class PortalsService implements OnDestroy {
 
   // Observable to publish selected portal
-  public portalDataState: Subject<PortalData> = new Subject<PortalData>();
+  public portalDataState: BehaviorSubject<PortalData> = new BehaviorSubject<PortalData>(null);
   private userSubscription: Subscription;
 
   constructor(private user: UserService, private pg: PgService) {
@@ -44,7 +44,12 @@ export class PortalsService implements OnDestroy {
       mainsections: {
         mse_id: true,
         mse_name: true,
-        mainmenus: { mme_id: true, mme_name: true, mme_content_type: true, mme_content_id: true }
+        mainmenus: {
+          mme_id: true,
+          mme_name: true,
+          mme_content_type: true,
+          mme_content_id: true
+        }
       }
     };
     this.pg.pgcall('portal/portal_json', {
@@ -96,4 +101,9 @@ export class PortalsService implements OnDestroy {
     });
   }
 
+  getMainmenu(id: number) {
+    return this.pg.pgcall('portal/mainmenu_get', {
+      prm_mme_id: id
+    });
+  }
 }
